@@ -1,7 +1,7 @@
 //MÓDULO DE FUNCIONAMIENTO DE MODIFICACIÑON DE NOTAS
 
 // Importamos las funciones del modelo de notas
-import pool from '../db/getPool.js'; 
+import pool from '../../../db/getPool.js'; 
 
 //NOTAS//
 //Función modificamos una nota
@@ -47,7 +47,7 @@ const updateNote = (req, res) => {
   };
   
 //exportamos funciones a rutas ( indexNoteController.js, ira a entries.routers.js)
-export { updateNote };
+export default updateNote ;
 
  /* EJEMPLO STEFANO
  router.put("/notes", (req, res) => {

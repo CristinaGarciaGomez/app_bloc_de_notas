@@ -1,7 +1,7 @@
 //MÓDULO DE FUNCIONAMIENTO DE LOGEO DEL USUARIO
 
 // Importamos las funciones del usuario.
-import pool from '../db/getPool.js';
+import pool from '../../../db/getPool.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
@@ -63,7 +63,7 @@ const loginController = (req, res) => {
   );
 };
 //exportamos funciones a rutas ( indexUserController.js, ira a user.routers.js)
-export { loginController };
+export default loginController ;
 
 
 
