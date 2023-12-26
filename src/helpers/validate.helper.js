@@ -1,7 +1,7 @@
 import errorHelper from './errors.helper.js'
 
 const validateHelperMiddleware = async (req, res, next) => {
-  const { schema, data } = req;  // Asegúrate de que req contenga tanto schema como data
+  const { schema, data } = req;  // Asegúrar de que req contenga tanto schema como data
 
   if (!schema || !data) {
     return errorHelper.badRequestError('Schema o datos faltantes');
@@ -9,7 +9,7 @@ const validateHelperMiddleware = async (req, res, next) => {
 
   try {
     await schema.validateAsync(data);
-    next();  // Continúa con el siguiente middleware o ruta
+    next();  // Continuamos con el siguiente middleware o ruta
   } catch (error) {
     console.error(error);
     errorHelper.badRequestError(error.details[0]?.message);
