@@ -2,7 +2,7 @@
 
 // Importamos las funciones del usuario.
 import bcrypt from 'bcrypt'
-import pool from '../db/getPool.js'; 
+import pool from '../../../db/getPool.js'; 
 
 // Función para registrar un nuevo usuario.
 const registerController = (req, res) => {
@@ -52,7 +52,7 @@ const registerController = (req, res) => {
 };
 
 //Exportamos funciones a rutas ( indexUserController.js, ira a user.routers.js)
-export { registerController };
+export default registerController ;
 
 
 /* EJEMPLO STEFANO
