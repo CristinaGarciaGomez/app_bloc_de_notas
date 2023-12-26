@@ -1,7 +1,7 @@
 //MÓDULO DE FUNCIONAMIENTO DE CONSULTA DE NOTA POR DETALLE
 
 // Importamos las funciones del modelo de notas
-import pool from '../db/getPool.js'; 
+import pool from '../../../db/getPool.js'; 
 
 //CONSULTAS//
 //Función para obtener nota por detalle

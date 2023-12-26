@@ -1,7 +1,7 @@
 //MÓDULO DE FUNCIONAMIENTO DE MODIFICACIÑON DE NOTAS
 
 // Importamos las funciones del modelo de notas
-import pool from '../db/getPool.js'; 
+import pool from '../../../db/getPool.js'; 
 
 //NOTAS//
 //Función modificamos una nota

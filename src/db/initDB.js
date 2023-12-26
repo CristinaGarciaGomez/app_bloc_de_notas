@@ -1,7 +1,7 @@
 //MÓDULO DE CREACIÓN DE LA BD EN MySQL 
 
 //Importamos pool de conexiones
-import getPool from "./getPool.js";
+import getPool from "./getPool";
 
 // Función crea de cero la DB y sus tablas
 const main = async () => {

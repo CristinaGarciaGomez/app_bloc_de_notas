@@ -6,10 +6,10 @@ import express from 'express';
 import dotenv  from 'dotenv';
 
 //Propios
-import validateAuth from './src/middleware/validateAuth.js';
-import errorHandler from '../app-notas-texto/src/middleware/errorHandler.js';
-import validateHelper from './src/helpers/validate.helper.js'
-import router from './src/routes/index.routes.js'; // Importamos rutas
+import validateAuth from '../app_bloc_de_notas/src/middleware/validateAuth.js';
+import errorHandler from '../app_bloc_de_notas/src/middleware/errorHandler.js';
+import validateHelper from '../app_bloc_de_notas/src/helpers/validate.helper.js'
+import router from '../app_bloc_de_notas/src/routes/index.routes.js'; // Importamos rutas
 import {
     newUserSchema,
     editUserPasswordSchema,
@@ -18,11 +18,13 @@ import {
     voteEntrySchema,
     passwordRecoverSchema,
     validateUserSchema,
-    imgSchema,
+    //imgSchema,
     errorMsg,
     errorMsgUsername,
     errorMsgPassword
-  } from './schemas';
+  } from '../app_bloc_de_notas/src/schemas/indexSchemas.js';
+
+
 
 dotenv.config() //Configuración de variables de entorno (.env)
 const {PORT} = process.env 

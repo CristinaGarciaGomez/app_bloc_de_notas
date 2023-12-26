@@ -2,7 +2,7 @@
 
 // Importamos las funciones del usuario.
 import bcrypt from 'bcrypt'
-import pool from '../db/getPool.js'; 
+import pool from '../../../db/getPool.js'; 
 
 // Función para registrar un nuevo usuario.
 const registerController = (req, res) => {

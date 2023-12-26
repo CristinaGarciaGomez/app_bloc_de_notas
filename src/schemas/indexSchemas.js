@@ -11,7 +11,7 @@ import newUserSchema from './users/newUser.schema.js';
 import passwordRecoverSchema from './users/passwordRecover.schema.js';
 import validateUserSchema from './users/validateUser.schema.js';
 //Img
-import imgSchema from './imgSchema';
+//import imgSchema from './imgSchema.js';
 //Error messages
 import { errorMsg, errorMsgUsername, errorMsgPassword } from './joi.error.messages.js'; 
 
@@ -24,7 +24,7 @@ export {
   newUserSchema,
   passwordRecoverSchema,
   validateUserSchema,
-  imgSchema,
+  //imgSchema,
   errorMsg,
   errorMsgUsername,
   errorMsgPassword

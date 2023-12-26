@@ -1,7 +1,7 @@
 //Módulo de funcionamiento de consulta de listado categorias completo
 
 // Importamos las funciones del modelo consultas de notas
-import pool from '../db/getPool.js'; 
+import pool from '../../../db/getPool.js'; 
 
 //BUSQUEDA CATEGORIAS//
 //Función obtenemos listado de gategorias
