@@ -4,13 +4,15 @@
 //Import de dependencias y módulos propios
 import express from 'express';
 import dotenv  from 'dotenv';
+import cors from 'cors';
+
 
 //Propios
 import validateAuth from '../app_bloc_de_notas/src/middleware/validateAuth.js';
 import errorHandler from '../app_bloc_de_notas/src/middleware/errorHandler.js';
-import validateHelper from '../app_bloc_de_notas/src/helpers/validate.helper.js'
+import validateHelperMiddleware from '../app_bloc_de_notas/src/helpers/validate.helper.js'
 import router from '../app_bloc_de_notas/src/routes/index.routes.js'; // Importamos rutas
-import {
+/*import {
     newUserSchema,
     editUserPasswordSchema,
     loginuserSchema,
@@ -22,7 +24,7 @@ import {
     errorMsg,
     errorMsgUsername,
     errorMsgPassword
-  } from '../app_bloc_de_notas/src/schemas/indexSchemas.js';
+  } from '../app_bloc_de_notas/src/schemas/indexSchemas.js';*/
 
 dotenv.config() //Configuración de variables de entorno (.env)
 const {PORT} = process.env 
@@ -32,12 +34,12 @@ const app = express(); //Iniciamos la aplicación con Express
 app.use(cors()); //Permitimos CORS
 app.use(express.json()); //Parseamos body de las solicitudes a JSON
 app.use(validateAuth);//Validación de JWT
-app.use(validateHelper);
+app.use(validateHelperMiddleware);
 
 // Rutas
 app.use(router);
 
-//Schemas
+/*//Schemas
 app.use(newUserSchema,
   editUserPasswordSchema,
   loginuserSchema,
@@ -48,7 +50,7 @@ app.use(newUserSchema,
   imgSchema,
   errorMsg,
   errorMsgUsername,
-  errorMsgPassword);
+  errorMsgPassword); */
 
 
 

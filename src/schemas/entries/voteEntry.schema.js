@@ -1,6 +1,7 @@
 //MÓDULO VALIDACIÓN DE VOTACIÓN DE ENTRADA
 
 //Importamos joi (validacion y errores personalizados)import joi from 'joi'
+import joi from 'joi';
 import * as joiMsg from '../joi.error.messages.js'
 
 const voteEntrySchema = joi.object({

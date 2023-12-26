@@ -16,7 +16,7 @@ import imgSchema from './imgSchema.js';
 import { errorMsg, errorMsgUsername, errorMsgPassword } from './joi.error.messages.js';
 
 // Exporta todos los esquemas
-export default {
+export {
   newEntrySchema,
   voteEntrySchema,
   editUserPasswordSchema,
