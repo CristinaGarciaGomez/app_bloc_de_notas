@@ -19,12 +19,12 @@
 							"raw": "{\r\n    \"email\": \"test@sitio.com\",\r\n    \"pass\": \"123456\" \r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/login",
+							"raw": "http://localhost:4000/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4000",
 							"path": [
 								"login"
 							]
@@ -42,12 +42,12 @@
 							"raw": "{\r\n    \"email\": \"test@sitio.com\",\r\n    \"pass\": \"123456\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/register",
+							"raw": "http://localhost:4000/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4000",
 							"path": [
 								"register"
 							]
@@ -61,40 +61,10 @@
 			"name": "categorias",
 			"item": [
 				{
-					"name": "categories",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3000/categories",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"categories"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "notas",
-			"item": [
-				{
-					"name": "busquedasNotas",
+					"name": "busquedasCategorias",
 					"item": [
 						{
-							"name": "NotesList",
+							"name": "categoriesFullList",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -105,92 +75,194 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/notes",
+									"raw": "http://localhost:4000/categories",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3000",
+									"port": "4000",
 									"path": [
-										"notes"
+										"categories"
 									]
 								}
 							},
 							"response": []
-						},
+						}
+					]
+				},
+				{
+					"name": "funcionesCategorias",
+					"item": []
+				}
+			]
+		},
+		{
+			"name": "notas",
+			"item": [
+				{
+					"name": "busquedasNotas",
+					"item": [
 						{
-							"name": "NoteListCategory",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:3000/notes?category=1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"notes"
-									],
-									"query": [
-										{
-											"key": "category",
-											"value": "1"
+							"name": "busquedaXrevisar",
+							"item": [
+								{
+									"name": "NotesList",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:4000/notes",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"notes"
+											]
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "NoteListCategorySearch",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:3000/notes?category=1&search=\"libro\"",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"notes"
-									],
-									"query": [
-										{
-											"key": "category",
-											"value": "1"
-										},
-										{
-											"key": "search",
-											"value": "\"libro\""
+									},
+									"response": []
+								},
+								{
+									"name": "NoteListSearch",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:4000/notes?search=\"libro\"",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"notes"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "\"libro\""
+												}
+											]
 										}
+									},
+									"response": []
+								},
+								{
+									"name": "NoteListCategorySearch",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:4000/notes?category=1&search=\"libro\"",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"notes"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "1"
+												},
+												{
+													"key": "search",
+													"value": "\"libro\""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "NoteListCategory",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:4000/notes?category=1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"notes"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "getDetailNotes",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/notes/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"notes",
+										"10"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "NoteListSearch",
+							"name": "getUserNotes",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "http://localhost:3000/notes?search=\"libro\"",
+									"raw": "http://localhost:4000/notes/:tittle",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3000",
+									"port": "4000",
 									"path": [
-										"notes"
+										"notes",
+										":tittle"
 									],
-									"query": [
+									"variable": [
 										{
-											"key": "search",
-											"value": "\"libro\""
+											"key": "tittle",
+											"value": ""
 										}
 									]
 								}
@@ -200,98 +272,111 @@
 					]
 				},
 				{
-					"name": "createNota",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "funcionesNotas",
+					"item": [
+						{
+							"name": "createNota",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/notes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"notes"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3000/notes",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"notes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DetailNote",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3000/notes/10",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"notes",
-								"10"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "modifyNota",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "modifyNota",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/notes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"notes"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3000/notes",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"notes"
-							]
+						{
+							"name": "deleteNota",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/notes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"notes"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		}
