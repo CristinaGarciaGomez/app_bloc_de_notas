@@ -1,17 +1,24 @@
 # app_bloc_de_notas
 
 ## DESCRIPCIÓN
-Hemos desarrollado una aplicación para almacenar notas de texto tipo bloc.
+El equipo de Rodrigo, Ramón y Cristina hemos desarrollado una aplicación para almacenar notas de texto tipo bloc.
 
 
 ## CARACTERÍSTICAS
 
 - Registro y login de usuarios.
 - Creación, modificación y eliminación de notas.
+- Creación, modificación y eliminación de categorias.
 - Categorización de notas.
-  
 
-## PASOS DEL DESARROLLO
+## LEYENDA
+
+- ✅ Terminado
+- 🔵 En desarrollo 
+- 🟡 Futuras actualizaciones
+- 🟥 Requiere revisión
+
+## PASOS DEL DESARROLLO ✅
 
 1. Creamos repositorio en github. 
 
@@ -56,7 +63,7 @@ Hemos desarrollado una aplicación para almacenar notas de texto tipo bloc.
 21. Realizamos pruebas de funcionamiento (una vez tenemos el mensaje de confirmación `Servidor corriendo en el puerto 4000`).
 
 
-## DEPENDENCIAS
+## DEPENDENCIAS ✅
 
     - express           (Agrega los módulos package.json y package-lock.json)    (El primero!!)
     - dotenv            (Acceder al archivo .env)
@@ -68,7 +75,7 @@ Hemos desarrollado una aplicación para almacenar notas de texto tipo bloc.
     
     
 
-## ENDPOINTS
+## ENDPOINTS ✅
 
 - **USUARIOS**
 
@@ -83,6 +90,13 @@ Hemos desarrollado una aplicación para almacenar notas de texto tipo bloc.
     - **DELETE** Elimina una nota
 
 
+-  **CATEGORIAS**
+
+    - **POST** Crea una categoria
+    - **PUT** Modifica una categoria
+    - **DELETE** Elimina una categoria   
+
+
 - **CONSULTAS**
 
     - **GET** Categorias / busqueda por id (lista total de categorias)
@@ -90,7 +104,7 @@ Hemos desarrollado una aplicación para almacenar notas de texto tipo bloc.
     - **GET** Notas / busqueda por detalle
     - **GET** Notas / busqueda por titulo
 
-    /* EN DESARROLLO 🟥
+    /* EN DESARROLLO 🔵
     - **GET** Notas / req.query
     - **GET** Notas / Devuelve notas por tipología
     - **GET** Notas / Devuelve notas por buscar palabra (o tipología)
@@ -113,28 +127,27 @@ Hemos desarrollado una aplicación para almacenar notas de texto tipo bloc.
   6) GET /notas/:id (devuelve el dettalle de la nota con id=id req.params)
 
   
-//pasos import de los endoints
+//pasos import de los endpoints
 /*
   1) USUARIOS: login y register ✅
-  2) CATEGORIAS: obtener todas ✅
-  3) NOTA: crearla ✅
-  4) NOTA: modificarla ✅
-  5) NOTA: eliminarla (opcional)✅
-  6) NOTA: obtener detalle ✅
-  7) NOTA: obtener título ✅
-  8) BUSQUEDA NOTAS:(4) ? 🟥
+  2) CATEGORIA: obtener todas ✅
+  3) CATEGORIA: crearla (opcional)✅
+  4) CATEGORIA: modificarla (opcional)✅
+  5) CATEGORIA: eliminarla (opcional)✅
+  6) NOTA: crearla ✅
+  7) NOTA: modificarla ✅
+  8) NOTA: eliminarla (opcional)✅
+  9) NOTA: obtener detalle ✅
+  10) NOTA: obtener título ✅
+  11) BUSQUEDA NOTAS:(4) ? 🔵
 */
    
- //FALTA REVISAR:
-  - Si tenemos todos los módulos necesarios (Primera revisión hecha)
-  - Funciones de create,modify,delete categorias(OPCIONAL PERO SU CARPETA SERIA `categoryFunction`)
-  - Terminar models.??
-  - Podriamos incluir en distintos módulos el `validateauth`, para que solo los usuarios logeandos puedan operar.
-  - Autenticación y Autorización:
-      . Implementar el sistema completo de autenticación, incluida la gestión de sesiones, si es necesario.
-      . Definir roles y permisos para tipos de usuario y asegurarse de que las rutas estén protegidas.
-  - Peticiones postman 
-  - Comprobaciones de si funciona todo
+ //FALTA REVISAR: 🟥
+  - Terminar models. ?? 🟥
+  - Podriamos incluir en distintos módulos el `validateauth`, para que solo los usuarios logeandos puedan operar. 🟡
+  - Autenticación y Autorización: Podriamos definir roles y permisos para tipos de usuario y asegurarse de rutas protegidas. 🟡
+  - Peticiones postman (estan casi todas) 🟥
+  - Comprobaciones de si funciona todo 🟥
 
 
 
@@ -145,7 +158,7 @@ Para ejecutar el proyecto:
 - En la terminal / bash usar comando `node index.js`
 
 
-Comandos útiles;
+# Comandos útiles;
 
 - Para revisar dependencias en busca de vulnerabilidades conocidas utiliza `npm audit`
 

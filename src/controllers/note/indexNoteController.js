@@ -5,6 +5,7 @@ import createNote from './noteFunction/createNoteController.js';
 import updateNote from './noteFunction/updateNoteController.js';
 import deleteNoteForUser from './noteFunction/updateNoteController.js';
 
+//Importamos los módulos de consultas de notas
 import getNoteDetail from './noteQuery/queryDetailController.js';
 import getUserNotes from './noteQuery/queryTitleController.js';
 
