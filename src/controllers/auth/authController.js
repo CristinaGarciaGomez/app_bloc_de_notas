@@ -1,8 +1,9 @@
 //MÓDULO PARA JWT
 
-const User = require('../models/User');
+/*const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, JWT_EXPIRATION } = require('../config/authConfig');
+
 
 //Registramos un nuevo usuario
 exports.register = async (req, res) => {
@@ -31,4 +32,4 @@ exports.login = async (req, res) => {
   } catch (error) {
     res.status(500).send({ error: 'Error al iniciar sesión' });
   }
-};
+}; */
