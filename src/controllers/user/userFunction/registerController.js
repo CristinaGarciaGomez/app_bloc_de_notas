@@ -1,8 +1,12 @@
 //MÓDULO DE FUNCIONAMIENTO DE REGISTRO DE USUARIO
 
 // Importamos las funciones del usuario.
-import bcrypt from 'bcrypt'
-import pool from '../../../db/getPool.js'; 
+import bcrypt from 'bcrypt';
+import pool from '../../../db/getPool.js';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'; 
+
+dotenv.config();
 
 // Función para registrar un nuevo usuario.
 const registerController = (req, res) => {
@@ -39,6 +43,10 @@ const registerController = (req, res) => {
             message: 'Error interno del servidor al crear el usuario.'
           });
         }
+
+    // Generamos un token JWT para el usuario registrado
+    const token = jwt.sign({ userId: results.insertId }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
 
         // Devolvemos una respuesta exitosa.
         res.status(201).send({
