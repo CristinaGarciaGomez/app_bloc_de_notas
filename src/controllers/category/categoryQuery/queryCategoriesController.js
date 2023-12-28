@@ -41,7 +41,7 @@ const getCategoriesController = async (req, res) => {
   }
  
   //exportamos funciones a rutas (entries.routes.js)
-  export { getCategoriesController };
+  export default getCategoriesController
 
 
    /*EJEMPLO STEFANO

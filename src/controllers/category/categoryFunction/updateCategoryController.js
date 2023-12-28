@@ -1,7 +1,7 @@
 // MÓDULO DE MODIFICACIÓN DE CATEGORIA
 
 // Importamos las funciones del modelo de categorias
-import getPool from "../../db/getPool.js";
+// import getPool from "../../../db/getPool.js";
 
 //NOTAS//
 //Función modificamos la categoria
