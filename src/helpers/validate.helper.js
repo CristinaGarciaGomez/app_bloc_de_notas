@@ -5,7 +5,7 @@ const validateHelper = async (schema, data) => {
     await schema.validateAsync(data)
   } catch (error) {
     console.error(error)
-    errorHelper.badRequestError(error.details[0]?.message)
+    errorHelper.badRequestError(error?.details?.[0]?.message)
   }
 }
 

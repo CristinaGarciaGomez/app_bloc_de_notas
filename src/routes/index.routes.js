@@ -6,7 +6,6 @@ import userRoutes from './user/user.routes.js';
 import entriesRoutes from './note/entries.routes.js';
 
 
-
 const router = express.Router();
 
 //Endpoints que vienen al principal de los archivos (entries.routes.js y user.routes.js ) 

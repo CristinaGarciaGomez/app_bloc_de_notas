@@ -5,17 +5,9 @@ import joi from 'joi';
 import * as joiMsg from '../joi.error.messages.js';
 
 const newUserSchema = joi.object({
-    username: joi.string()
-                    .min(3)
-                    .max(30)
-                    .required()
-                    .pattern(/^\S*$/)
-                    .messages({...joiMsg.errorMsg, ...joiMsg.errorMsgUsername}),
-    password: joi.string()
-                .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[¡!$%^&*()_+|~=`{}:";'<>¿?,.])[a-zA-Z0-9¡!$%^&*()_+|~=`{}:";'<>¿?,.]{8,}$/)
-                .required()
-                .messages({...joiMsg.errorMsg, ...joiMsg.errorMsgPassword}),
-    email: joi.string().email().required().messages(joiMsg.errorMsg)
+    email: joi.string().required().email().messages(...joiMsg.errorMsg),
+    userName: joi.string().min(3).max(30).required().messages({...joiMsg.errorMsg, ...joiMsg.errorMsgUsername}),
+    password: joi.string().required().messages({...joiMsg.errorMsg, ...joiMsg.errorMsgPassword})
 });
 
-export default newUserSchema;
+export default newUserSchema
