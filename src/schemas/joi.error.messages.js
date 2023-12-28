@@ -25,8 +25,3 @@ export const errorMsgPassword = {
         'La contraseña debe contener al menos una mayúscula, una minúscula, un número y un símbolo de puntuación para "{#key}"',
 };
 
-/*export default {
-    errorMsg,
-    errorMsgUsername,
-    errorMsgPassword
-};*/

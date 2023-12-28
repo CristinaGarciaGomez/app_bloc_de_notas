@@ -22,7 +22,7 @@ El equipo de Rodrigo, Ramón y Cristina hemos desarrollado una aplicación para 
 
 1. Creamos repositorio en github. 
 
-2. Clonamos repositorio de github en una carpeta nueva en el pc (app-notas-texto) con el comando `git clone` + `url de repositorio en github`.
+2. Clonamos repositorio de github en una carpeta nueva en el pc (app-notas-texto ejemplo) con el comando `git clone` + `url de repositorio en github`.
    
 3. Iniciamos proyecto con el comando `npm init -y`.
    
@@ -56,7 +56,7 @@ El equipo de Rodrigo, Ramón y Cristina hemos desarrollado una aplicación para 
 
 18. Creamos rutas/Endpoints (para los controllers).
 
-19. Configuramos endpoints en Postman (incluiremos el archivo para los compañeros).
+19. Configuramos endpoints en Postman (se hacen de uno en uno, incluiremos el archivo para los compañeros).
 
 20. Incluimos archivo del postman en el repositorio ("blockDeNotas.postan_collection.son").
 
@@ -143,7 +143,7 @@ El equipo de Rodrigo, Ramón y Cristina hemos desarrollado una aplicación para 
 */
    
  //FALTA REVISAR: 🟥
-  - Terminar models. ?? 🟥
+  - Models no va a ser necesario (ya revisado). ✅
   - Podriamos incluir en distintos módulos el `validateauth`, para que solo los usuarios logeandos puedan operar. 🟡
   - Autenticación y Autorización: Podriamos definir roles y permisos para tipos de usuario y asegurarse de rutas protegidas. 🟡
   - Peticiones postman (estan casi todas) 🟥
@@ -155,11 +155,13 @@ El equipo de Rodrigo, Ramón y Cristina hemos desarrollado una aplicación para 
 
 Para ejecutar el proyecto:
 
-- En la terminal / bash usar comando `node index.js`
+- En la terminal / bash usar comando `node index.js`.
 
 
-# Comandos útiles;
+# Comandos útiles
 
-- Para revisar dependencias en busca de vulnerabilidades conocidas utiliza `npm audit`
+- Para revisar dependencias instaladas `npm list`.
+- Para revisar dependencias instaladas de primer nivel `npm list --depth=0`. 
+- Para revisar dependencias en busca de vulnerabilidades conocidas utiliza `npm audit`.
 
 

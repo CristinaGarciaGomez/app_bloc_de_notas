@@ -3,8 +3,8 @@
 //Importamos joi (validacion y errores personalizados)import joi from 'joi'
 import * as joiMsg from '../joi.error.messages.js'
 
-const voteEntrySchema = joi.object({
-  value: joi.number().integer().min(1).max(5).required().messages(joiMsg)//Reglas para el valor
+const getEntryByTitle = joi.object({
+  title: joi.number().required().messages(joiMsg)
 })
 
-export default voteEntrySchema
+export default getEntryByTitle
