@@ -16,7 +16,7 @@ export const createCategory = async (req, res) => {
     if (existingCategory.length > 0) {
         return res.status(400).send({
             status: 'error',
-            message: 'La categoría ya existe.'
+            message: 'La categoría ya existe.🔴'
         });
     }
 
@@ -26,13 +26,13 @@ export const createCategory = async (req, res) => {
 
         res.status(201).send({
             status: 'ok',
-            message: 'Categoría creada exitosamente.'
+            message: 'Categoría creada exitosamente.✅'
         });
     } catch (error) {
         console.error('Error al crear la categoría:', error);
         res.status(500).send({
             status: 'error',
-            message: 'Error interno del servidor al crear la categoría.'
+            message: 'Error interno del servidor al crear la categoría.🔴'
         });
     }
 };

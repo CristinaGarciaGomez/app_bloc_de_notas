@@ -12,7 +12,7 @@ const deleteCategory = async (req, res) => {
   if (!id) {
     return res.status(400).json({
       status: "error",
-      message: "ID de categoría no proporcionado.",
+      message: "ID de categoría no proporcionado.🔴",
     });
   }
 
@@ -25,12 +25,12 @@ const deleteCategory = async (req, res) => {
     if (result.affectedRows > 0) {
       return res.status(200).json({
         status: "success",
-        message: "Categoría eliminada correctamente.",
+        message: "Categoría eliminada correctamente.✅",
       });
     } else {
       return res.status(404).json({
         status: "error",
-        message: "Categoría no encontrada o ya eliminada.",
+        message: "Categoría no encontrada o ya eliminada.🔴",
       });
     }
   } catch (error) {

@@ -1,53 +1,70 @@
-//MÓDULO DE FUNCIONAMIENTO DE MODIFICACIÑON DE NOTAS
-
-// Importamos las funciones del modelo de notas
-import pool from '../../../db/getPool.js'; 
+//MÓDULO DE FUNCIONAMIENTO DE MODIFICACION DE NOTAS
 
 //NOTAS//
-//Función modificamos una nota
-const updateNote = (req, res) => {
-    // Extraemos los datos de la solicitud
-    const { id } = req.params;  // Suponiendo que el ID de la nota está en los parámetros de la ruta
-    const { title, text, categoriaId } = req.body;
-  
-    // Validar que se proporcionen todos los campos necesarios
-    if (!id || !title || !text || !categoriaId) {
-      return res.status(400).send({
-        status: "error",
-        message: "Todos los campos (id, title, text, categoriaId) son requeridos."
-      });
-    }
-  
-    // Modificar la nota en la base de datos
-    pool.query(
-      'UPDATE notas SET title=?, text=?, categoriaId=? WHERE id=?',
-      [title, text, categoriaId, id],
-      (error, results) => {
-        if (error) {
-          console.error("Error al modificar la nota:", error);
-          return res.status(500).send({
+//Función creamos una nota 
+//Importamos las funciones del modelo de notas
+import { updateNoteService } from '../../../services/note/indexNoteService.js';
+
+// Controlador para actualizar una nota basada en su ID
+const updateNoteController = (req, res) => {
+  // Extraemos los datos de la solicitud
+  const { id } = req.params;
+  const { title, text, categoriaId } = req.body;
+
+  // Verificamos que los parámetros requeridos estén presentes
+  if (!id || !title || !text || !categoriaId) {
+    return res.status(400).send({
+      status: "error",
+      message: "Todos los campos (id, title, text, categoriaId) son requeridos.🔴"
+    });
+  }
+
+  try {
+    // Llamamos al servicio para actualizar la nota
+    updateNoteService(id, title, text, categoriaId)
+      .then(success => {
+        if (success) {
+          // Si la nota se actualizó con éxito, respondemos con un mensaje positivo
+          res.status(200).send({
+            status: "ok",
+            message: "Nota modificada exitosamente.✅",
+            data: {
+              id,
+              title,
+              text,
+              categoriaId
+            }
+          });
+        } else {
+          // Si no se pudo actualizar la nota, respondemos con un mensaje de error
+          res.status(500).send({
             status: "error",
-            message: "Error interno del servidor al modificar la nota."
+            message: "Error al modificar la nota.🔴"
           });
         }
-  
-        // Devolver la respuesta con los datos de la nota modificada
-        res.status(200).send({
-          status: "ok",
-          message: "Nota modificada exitosamente.",
-          data: {
-            id,
-            title,
-            text,
-            categoriaId
-          }
+      })
+      .catch(error => {
+        // Si hubo un error al actualizar la nota, respondemos con un mensaje de error
+        console.error("Error al modificar la nota:", error);
+        res.status(500).send({
+          status: "error",
+          message: "Error interno del servidor al modificar la nota.🔴"
         });
-      }
-    );
-  };
-  
+      });
+  } catch (error) {
+    // Si ocurrió un error inesperado, respondemos con un mensaje de error
+    console.error("Error al modificar la nota:", error);
+    res.status(500).send({
+      status: "error",
+      message: "Error interno del servidor al modificar la nota.🔴"
+    });
+  }
+};
+
 //exportamos funciones a rutas ( indexNoteController.js, ira a entries.routers.js)
-export default updateNote ;
+export default updateNoteController;
+
+
 
  /* EJEMPLO STEFANO
  router.put("/notes", (req, res) => {

@@ -18,14 +18,14 @@ const getCategoriesController = async (req, res) => {
         // Enviamos respuesta con el listado de categorías
         res.status(200).send({
           status: "ok",
-          message: "Listado categorías",
+          message: "Listado categorías. ✅",
           data: categoryNames//Revisarlo
         });
       } else {
         // Si no se encontraron, enviarmos error 
         res.status(404).send({
           status: "error",
-          message: "No se encontraron categorías"
+          message: "No se encontraron categorías.🔴"
         });
       }
     } catch (error) {
@@ -35,7 +35,7 @@ const getCategoriesController = async (req, res) => {
       // Enviamos un error 500 en caso de error interno del servidor
       res.status(500).send({
         status: "error",
-        message: "Error interno del servidor al obtener categorías"
+        message: "Error interno del servidor al obtener categorías🔴"
       });
     }
   }

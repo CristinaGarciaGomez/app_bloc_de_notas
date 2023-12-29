@@ -1,62 +1,40 @@
 //MÓDULO DE FUNCIONAMIENTO DE REGISTRO DE USUARIO
 
 // Importamos las funciones del usuario.
-import bcrypt from 'bcrypt';
-import pool from '../../../db/getPool.js';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv'; 
+import register from '../../../services/user/indexUserService.js';  // Asegúrate de poner la ruta correcta al archivo userService.js
 
-dotenv.config();
-
-// Función para registrar un nuevo usuario.
-const registerController = (req, res) => {
-  // Extraemos datos del cuerpo de la solicitud.
+// Controlador para registrar un nuevo usuario.
+const registerController = async (req, res) => {
   const { email, password, userName } = req.body;
 
-  // Validamos que se proporcionen todos los campos necesarios.
+  
+  // Validamos de datos de entrada.
   if (!email || !password || !userName) {
     return res.status(400).send({
       status: 'error',
-      message: 'Todos los campos (email, password, userName) son requeridos.'
+      message: 'Todos los campos (email, password, userName) son requeridos.🔴'
     });
   }
 
-  // Hasheamos la contraseña antes de almacenarla.
-  bcrypt.hash(password, 10, (err, hash) => {
-    if (err) {
-      console.error('Error al hashear la contraseña:', err);
-      return res.status(500).send({
-        status: 'error',
-        message: 'Error interno del servidor al hashear la contraseña.'
-      });
-    }
-
-    // Insertamos el nuevo usuario en la base de datos.
-    pool.query(
-      'INSERT INTO users (email, password, userName) VALUES (?, ?, ?)',
-      [email, hash, userName],
-      (error, results) => {
-        if (error) {
-          console.error('Error al crear el usuario:', error);
-          return res.status(500).send({
-            status: 'error',
-            message: 'Error interno del servidor al crear el usuario.'
-          });
-        }
-
-    // Generamos un token JWT para el usuario registrado
-    const token = jwt.sign({ userId: results.insertId }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-
-        // Devolvemos una respuesta exitosa.
-        res.status(201).send({
-          status: 'ok',
-          message: 'Usuario creado exitosamente.',
-          userId: results.insertId  // ID del usuario recién creado
-        });
-      }
-    );
-  });
+  try {
+    // Llamamos al servicio de registro.
+    const { userId, token } = await register(email, password, userName); // Utilizamos directamente la función `register` importada.
+    
+    // Respuesta exitosa.
+    res.status(201).send({
+      status: 'ok',
+      message: 'Usuario registrado exitosamente.✅',
+      userId,
+      token
+    });
+  } catch (error) {
+    // Manejo de errores.
+    console.error('Error en el registro:', error);
+    res.status(500).send({
+      status: 'error',
+      message: 'Error interno del servidor al registrar el usuario.🔴'
+    });
+  }
 };
 
 //Exportamos funciones a rutas ( indexUserController.js, ira a user.routers.js)
