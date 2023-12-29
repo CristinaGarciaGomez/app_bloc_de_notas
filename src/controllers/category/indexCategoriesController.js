@@ -5,14 +5,9 @@
 import getCategoriesController from './categoryQuery/queryCategoriesController.js';
 
 // Importamos las funciones de manipulación de categorías
-import createCategory from './categoryFunction/createCategoryController.js';
-import updateCategory from './categoryFunction/updateCategoryController.js';
-import deleteCategory from './categoryFunction/deleteCategoryController.js';
+import createCategoryController from './categoryFunction/createCategoryController.js';
+import updateCategoryController from './categoryFunction/updateCategoryController.js';
+import deleteCategoryController from './categoryFunction/deleteCategoryController.js';
 
 // Exportamos funciones para rutas (entries.routers.js)
-export {
-  getCategoriesController,
-  createCategory,
-  updateCategory,
-  deleteCategory
-};
+export { getCategoriesController, createCategoryController, updateCategoryController, deleteCategoryController }
