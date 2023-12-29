@@ -2,30 +2,37 @@
 
 // Importamos todos los archivos 
 //Entries
-import newEntrySchema from './entries/newEntry.schema.js';
-import voteEntrySchema from './entries/voteEntry.schema.js';
+import newEntrySchema from './entries/entryFunctionSchema/newEntry.schema.js/index.js';
+import updateEntrySchema from './entries/entryFunctionSchema/updateEntry.schema.js';
+import getEntryById from './entries/entryQuerySchema/getEntryById.schema.js';
+import getEntryByTitle from './entries/entryQuerySchema/getEntryByTitle.schema.js';
+
 //Users
-import editUserPasswordSchema from './users/editUserPassword.schema.js';
-import loginuserSchema from './users/loginUser.schema.js';
-import newUserSchema from './users/newUser.schema.js';
-import passwordRecoverSchema from './users/passwordRecover.schema.js';
-import validateUserSchema from './users/validateUser.schema.js';
-//Img
-import imgSchema from './imgSchema.js';
+import newUserSchema from './users/userFunctionSchema/newUser.schema.js';
+import loginuserSchema from './users/userFunctionSchema/loginUser.schema.js';
+import validateUserSchema from './users/recover/validateUser.schema.js';
+import editUserPasswordSchema from './users/recover/editUserPassword.schema.js';
+import passwordRecoverSchema from './users/recover/passwordRecover.schema.js';
+
+
+//Imágenes
+//import imgSchema from './img/imgSchema.js';
+
 //Error messages
 import { errorMsg, errorMsgUsername, errorMsgPassword } from './joi.error.messages.js';
 
 // Exporta todos los esquemas
 export default {
-  newEntrySchema,
-  voteEntrySchema,
-  editUserPasswordSchema,
-  loginuserSchema,
-  newUserSchema,
-  passwordRecoverSchema,
-  validateUserSchema,
-  imgSchema,
-  errorMsg,
-  errorMsgUsername,
+  newEntrySchema, 
+  updateEntrySchema, 
+  getEntryById, 
+  getEntryByTitle, 
+  newUserSchema, 
+  loginuserSchema, 
+  validateUserSchema, 
+  editUserPasswordSchema, 
+  passwordRecoverSchema, 
+  errorMsg, 
+  errorMsgUsername, 
   errorMsgPassword
 };

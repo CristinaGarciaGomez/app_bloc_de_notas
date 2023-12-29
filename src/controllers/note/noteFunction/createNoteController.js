@@ -1,11 +1,13 @@
 //MÓDULO DE FUNCIONAMIENTO DE CREACIÓN DE NOTAS
 
+//NOTAS//
+//Función creamos una nota 
 // Importamos las funciones del modelo de notas
-import pool from '../../../db/getPool.js'; 
+import { createNoteService } from '../../../services/note/indexNoteService.js';  
 
 //NOTAS//
 //Función creamos la nota
-const createNote = (req, res) => {
+const createNoteController = (req, res) => {
   // Extraemos los datos de la solicitud
   const { title, text, categoriaId, userId } = req.body;
 
@@ -13,43 +15,43 @@ const createNote = (req, res) => {
   if (!title || !text || !categoriaId || !userId) {
     return res.status(400).send({
       status: "error",
-      message: "Todos los campos (title, text, categoriaId, userId) son requeridos."
+      message: "Todos los campos (title, text, categoriaId, userId) son requeridos.🔴"
     });
   }
 
-  // Creamos una nueva nota en la base de datos
-  pool.query(
-    'INSERT INTO notas (title, text, categoriaId, userId) VALUES (?, ?, ?, ?)',
-    [title, text, categoriaId, userId],
-    (error, results) => {
-      if (error) {
-        console.error("Error al crear la nota:", error);
-        return res.status(500).send({
-          status: "error",
-          message: "Error interno del servidor al crear la nota."
+  try {
+    createNoteService(title, text, categoriaId, userId)
+      .then(noteId => {
+        res.status(201).send({
+          status: "ok",
+          message: "Nota creada exitosamente.✅",
+          data: {
+            id: noteId,
+            title,
+            text,
+            categoriaId,
+            userId
+          }
         });
-      }
-
-      // Devolvemos la respuesta con los datos de la nota creada
-      res.status(201).send({
-        status: "ok",
-        message: "Nota creada exitosamente.",
-        data: {
-          id: results.insertId,  // ID generado automáticamente por la bd
-          title,
-          text,
-          categoriaId,
-          userId
-        }
+      })
+      .catch(error => {
+        console.error("Error al crear la nota:", error);
+        res.status(500).send({
+          status: "error",
+          message: "Error interno del servidor al crear la nota.🔴"
+        });
       });
-    }
-  );
+  } catch (error) {
+    console.error("Error al crear la nota:", error);
+    res.status(500).send({
+      status: "error",
+      message: "Error interno del servidor al crear la nota.🔴"
+    });
+  }
 };
 
-
 //exportamos funciones a rutas ( indexNoteController.js, ira a entries.routers.js)
-export default createNote ;
-
+export default createNoteController;
 
 /* EJEMPLO STEFANO
 router.post("/notes", (req, res) => {

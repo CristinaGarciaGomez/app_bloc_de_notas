@@ -1,14 +1,14 @@
 //MÓDULO DE FUNCIONAMIENTO DE LOGEO DEL USUARIO
 
 // Importamos las funciones del usuario.
-import pool from '../../../db/getPool.js';
+import findUserByEmail from '../../../services/user/indexUserService.js';
+import comparePasswords from '../../../services/user/indexUserService.js';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const loginController = (req, res) => {
+const loginController = async (req, res) => {
   // Extraemos datos del cuerpo de la solicitud
   const { email, password } = req.body;
 
@@ -16,7 +16,50 @@ const loginController = (req, res) => {
   if (!email || !password) {
     return res.status(400).send({
       status: 'error',
-      message: 'Todos los campos (email, password) son requeridos.'
+      message: 'Todos los campos (email, password) son requeridos.🔴'
+    });
+  }
+
+  try {
+    // Buscamos el usuario por email
+    const user = await findUserByEmail(email);
+
+    // Si encontramos el usuario y la contraseña coincide
+    if (user && await comparePasswords(password, user.password)) {
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+      return res.status(200).send({
+        status: 'ok',
+        message: 'Inicio de sesión exitoso.✅',
+        token,
+        userId: user.id,
+        userName: user.userName
+      });
+    } else {
+      // Si no se encontró un usuario o la contraseña no coincide
+      res.status(401).send({
+        status: 'error',
+        message: 'Credenciales incorrectas.🔴'
+      });
+    }
+  } catch (error) {
+    console.error('Error al iniciar sesión:', error);
+    return res.status(500).send({
+      status: 'error',
+      message: 'Error interno del servidor al iniciar sesión.🔴'
+    });
+  }
+};
+
+/*const loginController = (req, res) => {
+  // Extraemos datos del cuerpo de la solicitud
+  const { email, password } = req.body;
+
+  // Validamos que se proporcionen ambos campos: email y password
+  if (!email || !password) {
+    return res.status(400).send({
+      status: 'error',
+      message: 'Todos los campos (email, password) son requeridos.🔴'
     });
   }
 
@@ -29,7 +72,7 @@ const loginController = (req, res) => {
         console.error('Error al iniciar sesión:', error);
         return res.status(500).send({
           status: 'error',
-          message: 'Error interno del servidor al iniciar sesión.'
+          message: 'Error interno del servidor al iniciar sesión.🔴'
         });
       }
 
@@ -46,7 +89,7 @@ const loginController = (req, res) => {
           
           return res.status(200).send({
             status: 'ok',
-            message: 'Inicio de sesión exitoso.',
+            message: 'Inicio de sesión exitoso.✅',
             token,
             userId: user.id,
             userName: user.userName
@@ -57,11 +100,12 @@ const loginController = (req, res) => {
       // Si no se encontró un usuario o la contraseña no coincide
       res.status(401).send({
         status: 'error',
-        message: 'Credenciales incorrectas.'
+        message: 'Credenciales incorrectas.🔴'
       });
     }
   );
-};
+};*/
+
 //exportamos funciones a rutas ( indexUserController.js, ira a user.routers.js)
 export default loginController ;
 

@@ -2,7 +2,7 @@
 
 //Importamos joi (validacion y errores personalizados)
 import joi from 'joi';
-import * as joiMsg from '../joi.error.messages.js';
+import * as joiMsg from '../../joi.error.messages.js';
 
 const loginUserSchema = joi.object({
     email: joi.string().required().messages(joiMsg.errorMsg),

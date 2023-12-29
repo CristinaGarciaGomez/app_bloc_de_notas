@@ -1,53 +1,74 @@
 //MÓDULO DE FUNCIONAMIENTO DE BORRADO DE NOTAS
 
-// Importamos las funciones del modelo de notas
-import pool from '../../../db/getPool.js'; 
-
-
 //NOTAS//
-//Función borrarmos una nota  
-const deleteNoteForUser = (req, res) => {
-    // Extraemos el ID  y el ID del usuario desde el cuerpo de la solicitud
-    const { id } = req.params;
-    const userId = req.body.userId; // Asume que el usuario ha iniciado sesión y envía su ID en el cuerpo
-  
-    // Verificamos que se proporcionó un ID de nota y un ID de usuario válidos
-    if (!id || !userId) {
-      return res.status(400).send({
-        status: "error",
-        message: "Los parámetros 'id' y 'userId' son requeridos."
-      });
-    }
-  
-    
-    // Eliminamos en la bd, aseguramos que el usuario tenga permiso para eliminar la nota
-    pool.query(
-      'DELETE FROM notas WHERE id = ? AND userId = ?',
-      [id, userId],
-      (error, results) => {
-        if (error) {
-          console.error("Error al eliminar la nota:", error);
-          return res.status(500).send({
-            status: "error",
-            message: "Error interno del servidor al eliminar la nota."
-          });
-        }
-  
-        // Verificamos si se eliminó la nota
-        if (results.affectedRows > 0) {
+//Función borrarmos una nota 
+// Importamos las funciones del modelo de notas 
+import { deleteNoteService } from '../../../services/note/indexNoteService.js';
+
+// Controlador para eliminar una nota basada en su ID
+const deleteNoteController = (req, res) => {
+  // Extraemos el ID de la nota y el ID del usuario desde la solicitud
+  const { id } = req.params;
+  const userId = req.body.userId;
+
+  // Verificamos que los parámetros requeridos estén presentes
+  if (!id || !userId) {
+    return res.status(400).send({
+      status: "error",
+      message: "Los parámetros 'id' y 'userId' son requeridos.🔴"
+    });
+  }
+
+  try {
+    // Llamamos al servicio para eliminar la nota
+    deleteNoteService(id, userId)
+      .then(success => {
+        if (success) {
+          // Si la nota se eliminó con éxito, respondemos con un mensaje positivo
           res.status(200).send({
             status: "ok",
-            message: "Nota eliminada exitosamente."
+            message: "Nota eliminada exitosamente.✅"
           });
         } else {
-          res.status(403).send({  // 403 Forbidden: el usuario no tiene permiso para borrar la nota
+          // Si no se pudo eliminar la nota, respondemos con un error de permisos
+          res.status(403).send({
             status: "error",
-            message: "No tienes permiso para eliminar esta nota o la nota no existe."
+            message: "No tienes permiso para eliminar esta nota o la nota no existe.🔴"
           });
         }
-      }
-    );
-  };
-  
+      })
+      .catch(error => {
+        // Si hubo un error al eliminar la nota, respondemos con un mensaje de error
+        console.error("Error al eliminar la nota:", error);
+        res.status(500).send({
+          status: "error",
+          message: "Error interno del servidor al eliminar la nota.🔴"
+        });
+      });
+  } catch (error) {
+    // Si ocurrió un error inesperado, respondemos con un mensaje de error
+    console.error("Error al eliminar la nota:", error);
+    res.status(500).send({
+      status: "error",
+      message: "Error interno del servidor al eliminar la nota.🔴"
+    });
+  }
+};
+
 //exportamos funciones a rutas ( indexNoteController.js, ira a entries.routers.js)
-export  default deleteNoteForUser ;
+export default deleteNoteController;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@
 //Importamos módulos de funciones 
 import express from 'express';
 import {  createCategory, updateCategory, deleteCategory, getCategoriesController } from '../../controllers/category/indexCategoriesController.js';
-import { createNote, updateNote, deleteNoteForUser, getNoteDetail, getUserNotes } from '../../controllers/note/indexNoteController.js';
+import { createNoteController, updateNoteController, deleteNoteController, getNoteDetailController, getUserNotesController} from '../../controllers/note/indexNoteController.js';
 import validateAuth from '../../middleware/validateAuth.js'; //Validación de Token
 
 const router = express.Router()
@@ -19,12 +19,12 @@ router.get('/categories',validateAuth, getCategoriesController);                
 
 
 //Notas
-router.post('/notes', validateAuth, createNote);                                                                            //Crear nota
-router.put('/notes/:id', validateAuth, updateNote);                                                                         //Modificar nota
-router.delete('/notes/:id', validateAuth, deleteNoteForUser);                                                               //Eliminar nota
+router.post('/notes', validateAuth, createNoteController);                                                                   //Crear nota
+router.put('/notes/:id', validateAuth, updateNoteController);                                                                //Modificar nota
+router.delete('/notes/:id', validateAuth, deleteNoteController);                                                             //Eliminar nota
 
-router.get('/notes/:id', validateAuth, getNoteDetail);                                                                      //Obterner nota por detalle
-router.get('/notes/:title', validateAuth, getUserNotes);                                                                    //Obtener nota por título
+router.get('/notes/:id', validateAuth, getNoteDetailController);                                                             //Obtener nota por detalle
+router.get('/notes/:title', validateAuth, getUserNotesController);                                                           //Obtener nota por título
 
 //Exportamos rutas (index.routes.js)
 export default router
