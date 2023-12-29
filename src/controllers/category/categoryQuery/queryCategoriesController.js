@@ -1,47 +1,39 @@
-//Módulo de funcionamiento de consulta de listado categorias completo
+//MÚDULO DE FUNCIONAMIENTO DE OBTENCION DEL LISTADO DE CATEGORIAS
 
-// Importamos las funciones del modelo consultas de notas
-import pool from '../../../db/getPool.js'; 
+// Importamos el servicio
+import fetchCategories from '../../../services/category/indexCategoryService.js';//CUIDAO
 
 //BUSQUEDA CATEGORIAS//
 //Función obtenemos listado de gategorias
+/**
+ * Controlador para obtener el listado de categorías.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const getCategoriesController = async (req, res) => {
     try {
-      // Consultamos para obtener categorías 
-      const categories = await pool.query('SELECT name FROM categorias');
-      
-      // Verificarmos si se encontraron categorías en la bd
-      if (categories && categories.length > 0) {
-        // Extraemos solo los nombres de las categorías de los resultados
-        const categoryNames = categories.map(category => category.name);
+        const categories = await fetchCategories();
         
         // Enviamos respuesta con el listado de categorías
         res.status(200).send({
-          status: "ok",
-          message: "Listado categorías. ✅",
-          data: categoryNames//Revisarlo
+            status: "ok",
+            message: "Listado categorías. ✅",
+            data: categories
         });
-      } else {
-        // Si no se encontraron, enviarmos error 
-        res.status(404).send({
-          status: "error",
-          message: "No se encontraron categorías.🔴"
-        });
-      }
     } catch (error) {
-      // Manejamos error que ocurra 
-      console.error("Error al obtener categorías:", error);
-      
-      // Enviamos un error 500 en caso de error interno del servidor
-      res.status(500).send({
-        status: "error",
-        message: "Error interno del servidor al obtener categorías🔴"
-      });
+        // Enviamos un error 500 en caso de error interno del servidor
+        res.status(500).send({
+            status: "error",
+            message: error.message || "Error interno del servidor al obtener categorías.🔴"
+        });
     }
-  }
+};
+
+//exportamos funciones a rutas (entries.routes.js)
+export default getCategoriesController;
  
-  //exportamos funciones a rutas (entries.routes.js)
-  export default getCategoriesController
+ 
+
 
 
    /*EJEMPLO STEFANO

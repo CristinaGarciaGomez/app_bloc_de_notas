@@ -2,7 +2,7 @@
 
 //Importamos módulos de funciones 
 import express from 'express';
-import {  createCategory, updateCategory, deleteCategory, getCategoriesController } from '../../controllers/category/indexCategoriesController.js';
+import { getCategoriesController, createCategoryController, updateCategoryController, deleteCategoryController } from '../../controllers/category/indexCategoriesController.js';
 import { createNoteController, updateNoteController, deleteNoteController, getNoteDetailController, getUserNotesController} from '../../controllers/note/indexNoteController.js';
 import validateAuth from '../../middleware/validateAuth.js'; //Validación de Token
 
@@ -11,9 +11,9 @@ const router = express.Router()
 //Endpoint de los archivos(indexCategoryController.js y indexNoteController.js)
 
 //Categorias
-router.post('/categories', validateAuth, createCategory);                                                                   //Crear categoria
-router.put('/categories/:id', validateAuth, updateCategory);                                                                //Modificar categoria
-router.delete('/notes/:id', validateAuth, deleteCategory);                                                                  //Eliminar categoria
+router.post('/categories', validateAuth, createCategoryController);                                                         //Crear categoria
+router.put('/categories/:id', validateAuth, updateCategoryController);                                                      //Modificar categoria
+router.delete('/notes/:id', validateAuth, deleteCategoryController);                                                        //Eliminar categoria
 
 router.get('/categories',validateAuth, getCategoriesController);                                                            //Obtener listado categorias
 
