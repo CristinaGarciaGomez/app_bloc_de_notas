@@ -48,7 +48,7 @@ El equipo de Rodrigo, Ramón y Cristina hemos desarrollado una aplicación para 
 
 14. Creamos middleware de manejo de errores en middleware/`errorHandler.js`.
 
-15. Creamos helpers.🟡
+15. Creamos helpers.
 
 16. Creamos schemas para validaciones de datos. 
 
@@ -143,9 +143,9 @@ El equipo de Rodrigo, Ramón y Cristina hemos desarrollado una aplicación para 
 */
    
  //FALTA REVISAR: 🟥
-  - Podriamos incluir en distintos módulos el `errores.helpers`, para que convinados con `errorHandler.js`(errores genéricos filtro final), filtremos también errores + especificos.🟡
-  - Podriamos incluir en distintos módulos el `validateauth.js`, para que solo los usuarios logeandos puedan operar. 🟡
-  - Autenticación y Autorización: Podriamos definir roles y permisos para tipos de usuario (para gestionar categorias por ejemplo). 🟡
+  - Models no va a ser necesario (ya revisado). ✅
+  - Podriamos incluir en distintos módulos el `validateauth`, para que solo los usuarios logeandos puedan operar. 🟡
+  - Autenticación y Autorización: Podriamos definir roles y permisos para tipos de usuario y asegurarse de rutas protegidas. 🟡
   - Peticiones postman (estan casi todas) 🟥
   - Comprobaciones de si funciona todo 🟥
 

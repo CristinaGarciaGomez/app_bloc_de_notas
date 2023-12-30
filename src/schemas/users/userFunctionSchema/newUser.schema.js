@@ -2,13 +2,12 @@
 
 //Importamos joi (validacion y errores personalizados)
 import joi from 'joi';
-import { errorMsg, errorMsgUsername, errorMsgPassword } from '../../errorMsg/joi.error.messages.js';
-
+import * as joiMsg from '../../joi.error.messages.js';
 
 const newUserSchema = joi.object({
-    email: joi.string().required().email().messages(errorMsg),
-    userName: joi.string().min(3).max(30).required().messages({ ...errorMsg, ...errorMsgUsername }),
-    password: joi.string().required().messages({ ...errorMsg, ...errorMsgPassword })
+    email: joi.string().required().email().messages(...joiMsg.errorMsg),
+    userName: joi.string().min(3).max(30).required().messages({...joiMsg.errorMsg, ...joiMsg.errorMsgUsername}),
+    password: joi.string().required().messages({...joiMsg.errorMsg, ...joiMsg.errorMsgPassword})
 });
 
 export default newUserSchema
