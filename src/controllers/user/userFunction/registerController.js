@@ -1,28 +1,24 @@
 //MÓDULO DE FUNCIONAMIENTO DE REGISTRO DE USUARIO
 
 // Importamos las funciones del usuario.
-import userService from '../../../services/user/indexUserService.js';
-import newUserSchema from '../../../schemas/users/userFunctionSchema/newUser.schema.js';  
+import register from '../../../services/user/indexUserService.js';  // Asegúrate de poner la ruta correcta al archivo userService.js
 
 // Controlador para registrar un nuevo usuario.
 const registerController = async (req, res) => {
-  // Validamos los datos de entrada con el esquema de Joi.
-  const { error, value } = newUserSchema.validate(req.body); // Usamos el esquema para validar req.body
+  const { email, password, userName } = req.body;
+
   
-  // Si hay un error en la validación, enviamos una respuesta 400.
-  if (error) {
+  // Validamos de datos de entrada.
+  if (!email || !password || !userName) {
     return res.status(400).send({
       status: 'error',
-      message: error.details[0].message // Usamos el primer mensaje de error para simplificar.
+      message: 'Todos los campos (email, password, userName) son requeridos.🔴'
     });
   }
 
-  // Extraemos los datos validados.
-  const { email, password, userName } = value; 
-
   try {
-    // Llamamos al servicio de registro desde el userService.
-    const { userId, token } = await userService.register(email, password, userName);
+    // Llamamos al servicio de registro.
+    const { userId, token } = await register(email, password, userName); // Utilizamos directamente la función `register` importada.
     
     // Respuesta exitosa.
     res.status(201).send({
@@ -42,12 +38,7 @@ const registerController = async (req, res) => {
 };
 
 //Exportamos funciones a rutas ( indexUserController.js, ira a user.routers.js)
-export default registerController;
-
-
-
-
-
+export default registerController ;
 
 
 /* EJEMPLO STEFANO
@@ -58,6 +49,3 @@ const registerController = (req, res) => {
     message: 'Usuario creado',
   });
 };*/
-
-
-
