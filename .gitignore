@@ -1,3 +1,4 @@
 # MÓDULO DE OCULTACIÓN DE ARCHIVOS
 
 # Ignorar el archivo .env
+.env

@@ -22,20 +22,14 @@ const register = async (email, password, userName) => {
         const pool = await getPool();
 
         // Conectamos a la base de datos y consultamos la inserción.
-        pool.query(
+        const results = await pool.query(
           'INSERT INTO users (email, password, userName) VALUES (?, ?, ?)',
-          [email, hash, userName],
-          (error, results) => {
-            if (error) {
-              reject('Error al crear el usuario en la base de datos🔴');
-              return;
-            }
-
-            // Generamos token JWT para el usuario registrado.
-            const token = jwt.sign({ userId: results.insertId }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            resolve({ userId: results.insertId, token });
-          }
+          [email, hash, userName]
         );
+
+        // Generamos token JWT para el usuario registrado.
+        const token = jwt.sign({ userId: results.insertId }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        resolve({ userId: results.insertId, token });
       } catch (error) {
         console.error('Error al obtener el pool:', error);
         reject('Error interno del servidor🔴');
@@ -43,5 +37,6 @@ const register = async (email, password, userName) => {
     });
   });
 };
+  
 //Exportamos funciones a controller (indexUserService.js, ira a registerController.js)
 export default register
