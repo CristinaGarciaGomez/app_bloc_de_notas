@@ -77,8 +77,7 @@ const main = async () => {
   } catch (err) {
     console.error("Error al configurar la base de datos:",err);
   } finally {
-    // cerramos el proceso.
-    process.exit();
+    // cerramos el proceso.!!!! no cerrar 
   }
 };
 // Ejecutamos la función anterior.
