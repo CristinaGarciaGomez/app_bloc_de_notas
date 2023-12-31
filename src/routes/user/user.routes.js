@@ -7,8 +7,8 @@ import { loginController,registerController } from '../../controllers/user/index
 const router = express.Router()
 
 //Endpoint de los archivos (userController.js)
-router.post("/register", registerController);
-router.post("/login",loginController );
+router.post("/registerController", registerController);
+router.post("/loginController",loginController );
 
 //Exportamos rutas (index.routes.js)
 export default router

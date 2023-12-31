@@ -1,18 +1,16 @@
 //MÓDULO DE SERVICIOS DE FUNCIONAMIENTO DE REGISTRO DE USUARIO
 
-// Importamos las funciones del usuario.
+// Importaciones necesarias
 import bcrypt from 'bcrypt';
-import pool from '../../../db/getPool.js';
+import getPool from '../../../db/getPool.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv'; 
-
-
 
 dotenv.config();
 
 // Función para registrar un nuevo usuario.
-const register = async (email, password, userName) => { // Extraemos datos del cuerpo de la solicitud.
-  return new Promise((resolve, reject) => {
+const register = async (email, password, userName) => {
+  return new Promise(async (resolve, reject) => {
     // Hasheamos la contraseña.
     bcrypt.hash(password, 10, async (err, hash) => {
       if (err) {
@@ -20,24 +18,30 @@ const register = async (email, password, userName) => { // Extraemos datos del c
         return;
       }
 
-      // Conectamos a la base de datos y consultamos la inserción.
-      pool.query(
-        'INSERT INTO users (email, password, userName) VALUES (?, ?, ?)',
-        [email, hash, userName],
-        (error, results) => {
-          if (error) {
-            reject('Error al crear el usuario en la base de datos🔴');
-            return;
-          }
+      try {
+        const pool = await getPool();
 
-          // Generamos token JWT para el usuario registrado.
-          const token = jwt.sign({ userId: results.insertId }, process.env.JWT_SECRET, { expiresIn: '1h' });
-          resolve({ userId: results.insertId, token });
-        }
-      );
+        // Conectamos a la base de datos y consultamos la inserción.
+        pool.query(
+          'INSERT INTO users (email, password, userName) VALUES (?, ?, ?)',
+          [email, hash, userName],
+          (error, results) => {
+            if (error) {
+              reject('Error al crear el usuario en la base de datos🔴');
+              return;
+            }
+
+            // Generamos token JWT para el usuario registrado.
+            const token = jwt.sign({ userId: results.insertId }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            resolve({ userId: results.insertId, token });
+          }
+        );
+      } catch (error) {
+        console.error('Error al obtener el pool:', error);
+        reject('Error interno del servidor🔴');
+      }
     });
   });
 };
-
 //Exportamos funciones a controller (indexUserService.js, ira a registerController.js)
 export default register
