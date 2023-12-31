@@ -5,7 +5,7 @@
 import createCategoryService from '../../../services/category/indexCategoryService.js'; 
 
 /**
- * Controlador para crear una nueva categoría.
+ * Controlador para crear una nueva categoría. 
  * @param {Object} req - Objeto de solicitud.
  * @param {Object} res - Objeto de respuesta.
  */
