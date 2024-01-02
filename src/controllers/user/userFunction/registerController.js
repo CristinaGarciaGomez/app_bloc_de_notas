@@ -46,10 +46,6 @@ export default registerController;
 
 
 
-
-
-
-
 /* EJEMPLO STEFANO
 const registerController = (req, res) => {
   // aqui me connecto al DB

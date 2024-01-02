@@ -19,7 +19,7 @@ import passwordRecoverSchema from './users/recover/passwordRecover.schema.js';
 //import imgSchema from './img/imgSchema.js';
 
 //Error messages
-import { errorMsg, errorMsgUsername, errorMsgPassword } from './joi.error.messages.js';
+import { errorMsg, errorMsgUsername, errorMsgPassword } from '../schemas/errorMsg/joi.error.messages.js';
 
 // Exporta todos los esquemas
 export default {
