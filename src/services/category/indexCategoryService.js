@@ -5,11 +5,9 @@
 import createCategoryService from './categoryFunctionService/createCategoryService.js';
 import updateCategoryService  from './categoryFunctionService/updateCategoryService.js';
 import deleteCategoryService  from './categoryFunctionService/deleteCategoryService.js';
-
-
 import fetchCategories  from './categoryQueryService/queryCategoriesService.js';
 
 //exportamos funciones a controllers (createNoteController.js,updetaNoteController.js y deleteNoteController.js)
-export default  {createCategoryService, updateCategoryService, deleteCategoryService, fetchCategories} 
+export {createCategoryService, updateCategoryService, deleteCategoryService, fetchCategories} 
 
 

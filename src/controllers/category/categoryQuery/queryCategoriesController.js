@@ -1,16 +1,12 @@
 //MÚDULO DE FUNCIONAMIENTO DE OBTENCION DEL LISTADO DE CATEGORIAS
 
 // Importamos el servicio
-import fetchCategories from '../../../services/category/indexCategoryService.js';//CUIDAO
+import {fetchCategories} from '../../../services/category/indexCategoryService.js';
 
 //BUSQUEDA CATEGORIAS//
 //Función obtenemos listado de gategorias
-/**
- * Controlador para obtener el listado de categorías.
- * @param {Object} req - Objeto de solicitud.
- * @param {Object} res - Objeto de respuesta.
- */
 const getCategoriesController = async (req, res) => {
+
     try {
         const categories = await fetchCategories();
         
@@ -32,9 +28,6 @@ const getCategoriesController = async (req, res) => {
 //exportamos funciones a rutas (entries.routes.js)
 export default getCategoriesController;
  
- 
-
-
 
    /*EJEMPLO STEFANO
    router.get("/notes", (req, res) => {
