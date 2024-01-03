@@ -12,7 +12,7 @@ const validateAuth = (req, res, next) => {
   if (!token) {
     return res.status(401).send({
       status: 'error',
-      message: 'Token no proporcionado.'
+      message: 'Token no proporcionado.❓'
     });
   }
 
@@ -29,7 +29,7 @@ const validateAuth = (req, res, next) => {
     console.error('Error al validar el token:', error.message);
     return res.status(401).send({
       status: 'error',
-      message: 'Token inválido o expirado.'
+      message: 'Token inválido o expirado.❗'
     });
   }
 };

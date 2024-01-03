@@ -2,18 +2,9 @@
 
 // Importamos la bd
 import getPool from '../../../db/getPool.js'; 
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
-const verifyToken = (token) => {
-    try {
-        return jwt.verify(token, process.env.JWT_SECRET);
-    } catch (error) {
-        throw new Error('Token inválido o expirado.🔴');
-    }
-};
 
 //Funcion para obtener lista de categorias 
 const fetchCategories = async () => {
