@@ -2,7 +2,7 @@
 
 //NOTAS//
 //Función modificamos la categoria
-import updateCategoryService from '../../../services/category/indexCategoryService.js'; 
+import {updateCategoryService} from '../../../services/category/indexCategoryService.js'; 
 
 /**
  * Controlador para modificar una categoría por su ID.

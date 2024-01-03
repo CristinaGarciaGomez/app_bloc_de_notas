@@ -2,7 +2,7 @@
 
 //CATEGORIAS//
 //Función creamos la categoria
-import createCategoryService from '../../../services/category/indexCategoryService.js'; 
+import {createCategoryService} from '../../../services/category/indexCategoryService.js'; 
 
 /**
  * Controlador para crear una nueva categoría. 

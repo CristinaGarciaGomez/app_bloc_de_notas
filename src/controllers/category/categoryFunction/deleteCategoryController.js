@@ -3,7 +3,7 @@
 //NOTAS//
 //Función borramos la categoria
 // Importamos el servicio
-import deleteCategoryService from '../../../services/category/indexCategoryService.js';  
+import {deleteCategoryService} from '../../../services/category/indexCategoryService.js';  
 
 /**
  * Controlador para eliminar una categoría por su ID.
