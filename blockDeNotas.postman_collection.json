@@ -7,19 +7,45 @@
 	},
 	"item": [
 		{
-			"name": "users",
+			"name": "users ✅",
 			"item": [
 				{
 					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\", data.token)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@sitio.com\",\r\n    \"pass\": \"123456\" \r\n}"
+							"raw": "{\r\n    \"email\": \"holamundo@lugar.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/login",
+							"raw": "http://localhost:4000/login?Authorization",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -27,6 +53,12 @@
 							"port": "4000",
 							"path": [
 								"login"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": null
+								}
 							]
 						}
 					},
@@ -36,10 +68,22 @@
 					"name": "register",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@sitio.com\",\r\n    \"pass\": \"123456\"\r\n}"
+							"raw": "{\r\n    \"email\": \"holamundo@lugar.com\",\r\n    \"password\": \"123456\",\r\n    \"userName\": \"testholamundo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:4000/register",
@@ -58,15 +102,83 @@
 			]
 		},
 		{
-			"name": "categorias",
+			"name": "categorias ✅",
 			"item": [
 				{
 					"name": "busquedasCategorias",
 					"item": [
 						{
 							"name": "categoriesFullList",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with status and message properties\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.all.keys('status', 'message');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"categories"
+									],
+									"query": [
+										{
+											"key": "Authorization",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "funcionesCategorias 🟡",
+					"item": [
+						{
+							"name": "createCategory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
 								"header": [
 									{
 										"key": "Authorization",
@@ -74,6 +186,15 @@
 										"type": "text"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "http://localhost:4000/categories",
 									"protocol": "http",
@@ -87,23 +208,107 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "modifyCategory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/categories?Authorization",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"categories"
+									],
+									"query": [
+										{
+											"key": "Authorization",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteCategory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/categories?Authorization",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"categories"
+									],
+									"query": [
+										{
+											"key": "Authorization",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
-				},
-				{
-					"name": "funcionesCategorias",
-					"item": []
 				}
 			]
 		},
 		{
-			"name": "notas",
+			"name": "notas 🟥",
 			"item": [
 				{
 					"name": "busquedasNotas",
 					"item": [
 						{
-							"name": "busquedaXrevisar",
+							"name": "busquedaXrevisar🟡",
 							"item": [
 								{
 									"name": "NotesList",
@@ -214,6 +419,16 @@
 						{
 							"name": "getDetailNotes",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [
 									{
@@ -240,6 +455,16 @@
 						{
 							"name": "getUserNotes",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [
 									{
@@ -281,13 +506,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "",
+										"value": "{{token}}",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
+									"raw": "{\r\n    \"title\":\"TituloPrueba\",\r\n    \"text\": \"TextoPrueba\",\r\n    \"categoriaId\": \"2\",\r\n    \"userId\":\"1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -311,6 +536,16 @@
 						{
 							"name": "modifyNota",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PUT",
 								"header": [
 									{
@@ -321,7 +556,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
+									"raw": "{\r\n    \"title\":\"TituloPrueba\",\r\n    \"text\": \"TextoPrueba\",\r\n    \"detail\":\"TextoPrueba\",\r\n    \"categoriaId\": \"1\",\r\n    \"userId\":\"1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -345,6 +580,16 @@
 						{
 							"name": "deleteNota",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [
 									{
@@ -355,7 +600,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\":\"HolaAAAA\",\r\n    \"text\": \"Texto\",\r\n    \"categoriaId\": \"1\"\r\n}",
+									"raw": "{\r\n    \"title\":\"TituloPrueba\",\r\n    \"text\": \"TextoPrueba\",\r\n    \"detail\":\"TextoPrueba\",\r\n    \"categoriaId\": \"1\",\r\n    \"userId\":\"1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

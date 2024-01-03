@@ -1,13 +1,11 @@
 //MÓDULO DE FUNCIONAMIENTO DE CREACIÓN DE NOTAS
 
-//NOTAS//
-//Función creamos una nota 
 // Importamos las funciones del modelo de notas
 import { createNoteService } from '../../../services/note/indexNoteService.js';  
 
 //NOTAS//
 //Función creamos la nota
-const createNoteController = (req, res) => {
+const createNoteController = async (req, res) => {
   // Extraemos los datos de la solicitud
   const { title, text, categoriaId, userId } = req.body;
 
