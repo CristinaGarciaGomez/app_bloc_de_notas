@@ -11,6 +11,7 @@ const main = async () => {
   try {
     pool = await getPool();
 
+      
     //Borramos y creamos las tablas
     console.log("Borrando tablas...");
     await pool.query("DROP TABLE IF EXISTS notas, categorias, users");
