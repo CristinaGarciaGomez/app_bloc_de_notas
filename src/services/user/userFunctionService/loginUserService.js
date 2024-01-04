@@ -20,7 +20,7 @@ const login = async (email, password) => {
 
       console.log("Resultado de la consulta:", user);
 
-      if (!user || user.length === 0) {
+      if ( user.length === 0) {
         reject('Usuario no encontrado.🔴');
         return;
       }
@@ -32,9 +32,10 @@ const login = async (email, password) => {
         reject('Contraseña incorrecta.🔴');
         return;
       }
+      //const tokeninfo = {id:user[0].id,};
 
       // Generar un token JWT para el usuario autenticado.
-      const token = jwt.sign({ userId: user[0].id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ userId: user[0].id }, process.env.JWT_SECRET, { expiresIn: '30d' });
       resolve({ userId: user[0].id, token });
 
     } catch (error) {

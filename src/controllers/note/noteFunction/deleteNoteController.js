@@ -6,57 +6,36 @@
 import { deleteNoteService } from '../../../services/note/indexNoteService.js';
 
 // Controlador para eliminar una nota basada en su ID
-const deleteNoteController = (req, res) => {
-  // Extraemos el ID de la nota y el ID del usuario desde la solicitud
-  const { id } = req.params;
-  const userId = req.body.userId;
-
-  // Verificamos que los parámetros requeridos estén presentes
-  if (!id || !userId) {
-    return res.status(400).send({
-      status: "error",
-      message: "Los parámetros 'id' y 'userId' son requeridos.🔴"
-    });
-  }
-
+export const deleteNoteController = async (req, res) => {
   try {
-    // Llamamos al servicio para eliminar la nota
-    deleteNoteService(id, userId)
-      .then(success => {
-        if (success) {
-          // Si la nota se eliminó con éxito, respondemos con un mensaje positivo
-          res.status(200).send({
-            status: "ok",
-            message: "Nota eliminada exitosamente.✅"
-          });
-        } else {
-          // Si no se pudo eliminar la nota, respondemos con un error de permisos
-          res.status(403).send({
-            status: "error",
-            message: "No tienes permiso para eliminar esta nota o la nota no existe.🔴"
-          });
-        }
-      })
-      .catch(error => {
-        // Si hubo un error al eliminar la nota, respondemos con un mensaje de error
-        console.error("Error al eliminar la nota:", error);
-        res.status(500).send({
-          status: "error",
-          message: "Error interno del servidor al eliminar la nota.🔴"
-        });
-      });
+    // Extraemos el ID de la nota y el ID del usuario de la solicitud
+    const { notasId } = req.params; 
+    const { userId } = req.body; //AHORA VAMOS A ELLO ESTA SIN HACER
+
+    // Verificamos si se proporcionaron los IDs necesarios
+    if (!notasId && !userId) {
+      return res.status(400).json({ error: 'Se requieren ID de nota y ID de usuario para eliminar una nota.🔴' });
+    }
+
+    // Intentamos eliminar la nota utilizando el servicio
+    const isDeleted = await deleteNoteService(notasId, userId);
+
+    // En función del resultado, enviamos una respuesta adecuada al cliente
+    if (isDeleted) {
+      return res.status(200).json({ message: 'La nota ha sido eliminada con éxito.✅' });
+    } else {
+      return res.status(403).json({ error: 'No se pudo eliminar la nota. Verifique los permisos o el ID proporcionado.🔴' });
+    }
+
   } catch (error) {
-    // Si ocurrió un error inesperado, respondemos con un mensaje de error
-    console.error("Error al eliminar la nota:", error);
-    res.status(500).send({
-      status: "error",
-      message: "Error interno del servidor al eliminar la nota.🔴"
-    });
+    // En caso de un error, enviamos una respuesta de error al cliente
+    console.error('Error al intentar eliminar la nota:🔴', error);
+    return res.status(500).json({ error: 'Error interno del servidor al intentar eliminar la nota.🔴' });
   }
 };
 
 //exportamos funciones a rutas ( indexNoteController.js, ira a entries.routers.js)
-export default deleteNoteController;
+//export default deleteNoteController;
 
 
 

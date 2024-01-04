@@ -13,15 +13,15 @@ const router = express.Router()
 //Categorias
 router.post('/categories', validateAuth, createCategoryController);                                                         //Crear categoria
 router.put('/categories/:id', validateAuth, updateCategoryController);                                                      //Modificar categoria
-router.delete('/notes/:id', validateAuth, deleteCategoryController);                                                        //Eliminar categoria
+router.delete('/categories/:id', validateAuth, deleteCategoryController);                                                        //Eliminar categoria
 
 router.get('/categories',validateAuth, getCategoriesController);                                                            //Obtener listado categorias
 
 
 //Notas
-router.post('/notes', validateAuth, createNoteController);                                                                   //Crear nota
-router.put('/notes/:id', validateAuth, updateNoteController);                                                                //Modificar nota
-router.delete('/notes/:id', validateAuth, deleteNoteController);                                                             //Eliminar nota
+router.post('/notas', validateAuth, createNoteController);                                                                   //Crear nota
+router.put('/notas/:id', validateAuth, updateNoteController);                                                                //Modificar nota
+router.delete('/notas/:id', validateAuth, deleteNoteController);                                                             //Eliminar nota
 
 router.get('/notes/:id', validateAuth, getNoteDetailController);                                                             //Obtener nota por detalle
 router.get('/notes/:title', validateAuth, getUserNotesController);                                                           //Obtener nota por título
