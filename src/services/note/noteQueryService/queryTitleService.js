@@ -1,16 +1,31 @@
 //MÓDULO DE FUNCIONAMIENTO DE SERVICIO DE CONSULTA DE NOTA POR TITULO
 
-// Importamos la bd
-import pool from '../../../db/getPool.js';
 
-/**
- * Función para obtener las notas de un usuario por su ID.
- * @param {number} userId - ID del usuario.
- * @returns {Promise<Array>} - Retorna una promesa con las notas del usuario.
- */
-export const getUserNotesService = (userId) => {
-  return pool.query(
-    'SELECT id, title FROM notas WHERE userId = ?',
-    [userId]
-  );
+//CONSULTAS//
+//Función para obtener nota por título
+// Importamos la bd
+import getPool from '../../../db/getPool.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+// Función para obtener nota por título
+export const getUserNoteService = async (userId, title) => {
+  try {
+    // Registra los valores recibidos
+    console.log("Valor de userId recibido:", userId);
+    console.log("Valor de title recibido:", title);
+
+    // Conexión a la base de datos
+    const pool = await getPool();
+
+    // Consulta para obtener la nota por título y userId
+    const [notasData] = await pool.query('SELECT id, title FROM notas WHERE userId = ? AND title = ?', [userId, title]);
+
+    return notasData;
+  } catch (error) {
+    // Manejo de errores: registra el error y lanza una excepción
+    console.error("Error al consultar notas por título:", error.message);
+    throw new Error("Error interno del servidor al consultar notas por título, getUserNotesService.🔴");
+  }
 };
