@@ -23,8 +23,8 @@ router.post('/notas', validateAuth, createNoteController);                      
 router.put('/notas/:id', validateAuth, updateNoteController);                                                                //Modificar nota
 router.delete('/notas/:id', validateAuth, deleteNoteController);                                                             //Eliminar nota
 
-router.get('/notas/:detail', validateAuth, getUserNoteDetailController);                                                             //Obtener nota por detalle
-router.get('/notas/:title', validateAuth, getUserNoteController);                                                           //Obtener nota por título
+router.get('/notas/:id/:detail', validateAuth, getUserNoteDetailController);                                                             //Obtener nota por detalle
+router.get('/notes/:title', validateAuth, getUserNoteController);                                                           //Obtener nota por título
 
 //Exportamos rutas (index.routes.js)
 export default router

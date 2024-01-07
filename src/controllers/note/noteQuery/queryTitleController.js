@@ -24,7 +24,9 @@ const getUserNoteController = async (req, res) => {
       res.status(200).send({
         status: 'ok',
         message: 'Notas obtenidas correctamente.✅',
-        data: notas//solo debe de dar titles
+        data: {
+          titles: title
+        }
       });
     }
   } catch (error) {
