@@ -1,24 +1,29 @@
 //MÓDULO DE FUNCIONAMIENTO DE SERVICIO DE MODIFICACION DE NOTAS
 
 // Importamos la bd
-import pool from '../../../db/getPool.js';
+import getPool from '../../../db/getPool.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Función para actualizar una nota en la base de datos
-export const updateNoteService = (id, title, text, categoriaId) => {
-  return new Promise((resolve, reject) => {
-    // Actualizamos la nota en la base de datos
-    pool.query(
-      'UPDATE notas SET title=?, text=?, categoriaId=? WHERE id=?',
-      [title, text, categoriaId, id],
-      (error, results) => {
-        if (error) {
-          // Si hay un error, rechazamos la promesa
-          reject(error);
-        } else {
-          // Si se actualizó la nota correctamente, resolvemos la promesa
-          resolve(results.affectedRows > 0);
-        }
-      }
+export const updateNoteService = async (id, title, detail, text, categoriaId) => {
+  try {
+    const pool = await getPool();
+
+    const [notaData] = await pool.query(
+      'UPDATE notas SET title=?, detail=?, text=?, categoriaId=? WHERE id=?',
+      [title, detail, text, categoriaId, id]
     );
-  });
+
+    if (notaData.affectedRows === 0) {
+      throw new Error("La nota no fue encontrada o no se pudo actualizar.🔴");
+    }
+
+    return { id: id, title, detail, text, categoriaId }; // Devolvemos los datos actualizados de la nota
+
+  } catch (error) {
+    console.error("Error al modificar la nota:", error);
+    throw new Error("Error interno del servidor al modificar la nota, updateNoteService.🔴");
+  }
 };
