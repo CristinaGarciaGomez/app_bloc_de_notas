@@ -10,7 +10,7 @@ const createNoteController = async (req, res) => {
   // Extraemos los datos de la solicitud
   const { title, detail, text, categoriaId } = req.body;
   const userId = req.userId;
-  console.log("Createnotecontroller <<<<<<<", userId);
+  console.log("Createnotecontroller", userId);
 
   // Validamos que nos proporciono todos los campos necesarios
   if (!title || !detail || !text || !categoriaId) {

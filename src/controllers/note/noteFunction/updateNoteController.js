@@ -6,60 +6,35 @@
 import { updateNoteService } from '../../../services/note/indexNoteService.js';
 
 // Controlador para actualizar una nota basada en su ID
-const updateNoteController = (req, res) => {
-  // Extraemos los datos de la solicitud
-  const { id } = req.params;
-  const { title, text, categoriaId } = req.body;
+const updateNoteController = async (req, res) => {
+  const { id, title, detail, text, categoriaId } = req.body;
 
-  // Verificamos que los parámetros requeridos estén presentes
-  if (!id || !title || !text || !categoriaId) {
+  // Validamos que se proporcionen todos los campos necesarios
+  if (!id || !title || !detail || !text || !categoriaId) {
     return res.status(400).send({
       status: "error",
-      message: "Todos los campos (id, title, text, categoriaId) son requeridos.🔴"
+      message: "Todos los campos (id, title, detail, text, categoriaId) son requeridos para actualizar.🔴"
     });
   }
 
   try {
-    // Llamamos al servicio para actualizar la nota
-    updateNoteService(id, title, text, categoriaId)
-      .then(success => {
-        if (success) {
-          // Si la nota se actualizó con éxito, respondemos con un mensaje positivo
-          res.status(200).send({
-            status: "ok",
-            message: "Nota modificada exitosamente.✅",
-            data: {
-              id,
-              title,
-              text,
-              categoriaId
-            }
-          });
-        } else {
-          // Si no se pudo actualizar la nota, respondemos con un mensaje de error
-          res.status(500).send({
-            status: "error",
-            message: "Error al modificar la nota.🔴"
-          });
-        }
-      })
-      .catch(error => {
-        // Si hubo un error al actualizar la nota, respondemos con un mensaje de error
-        console.error("Error al modificar la nota:", error);
-        res.status(500).send({
-          status: "error",
-          message: "Error interno del servidor al modificar la nota.🔴"
-        });
-      });
+    const updatedNote = await updateNoteService(id, title, detail, text, categoriaId);
+    
+    res.status(200).send({
+      status: "ok",
+      message: "Nota modificada exitosamente.✅",
+      data: updatedNote
+    });
+
   } catch (error) {
-    // Si ocurrió un error inesperado, respondemos con un mensaje de error
     console.error("Error al modificar la nota:", error);
     res.status(500).send({
       status: "error",
-      message: "Error interno del servidor al modificar la nota.🔴"
+      message: "Error interno del servidor al modificar la nota, updateNoteController.🔴"
     });
   }
 };
+
 
 //exportamos funciones a rutas ( indexNoteController.js, ira a entries.routers.js)
 export default updateNoteController;
