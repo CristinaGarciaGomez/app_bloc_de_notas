@@ -6,8 +6,8 @@ import updateNoteController from './noteFunction/updateNoteController.js';
 import deleteNoteController from './noteFunction/updateNoteController.js';
 
 //Importamos los módulos de consultas de notas
-import getNoteDetailController from './noteQuery/queryDetailController.js';
-import getUserNotesController from './noteQuery/queryTitleController.js';
+import getUserNoteDetailController from './noteQuery/queryDetailController.js';
+import getUserNoteController from './noteQuery/queryTitleController.js';
 
 //exportamos funciones a rutas (entries.routers.js)
-export {createNoteController, updateNoteController, deleteNoteController, getNoteDetailController, getUserNotesController };
+export {createNoteController, updateNoteController, deleteNoteController, getUserNoteDetailController, getUserNoteController };

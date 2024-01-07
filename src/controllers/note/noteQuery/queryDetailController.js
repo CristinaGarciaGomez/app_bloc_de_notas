@@ -2,41 +2,53 @@
 
 //CONSULTAS//
 //Función para obtener nota por detalle
-import { getNoteDetailService } from '../../../services/note/indexNoteService.js'; 
+import { getUserNoteByDetailService } from '../../../services/note/indexNoteService.js'; 
+import dotenv from 'dotenv';
 
-/**
- * Controlador para obtener el detalle de una nota.
- * @param {Object} req - Objeto de solicitud.
- * @param {Object} res - Objeto de respuesta.
- */
-const getNoteDetailController = async (req, res) => {
-  // Extraemos el ID de la nota de los parámetros de la ruta
-  const { id } = req.params;
+dotenv.config();
 
+const getUserNoteDetailController = async (req, res) => {
   try {
-    const noteDetail = await getNoteDetailService(id);
-    if (noteDetail) {
-      res.status(200).send({
-        status: "ok",
-        message: "Detalle de la nota obtenido exitosamente.✅",
-        data: noteDetail
+ 
+    //Obtenemos datos para su uso
+    const userId = req.userId;  
+    const { detail } = req.body; 
+
+    // Utilizamos el servicio para obtener la nota por detalle y userId
+    const note = await getUserNoteByDetailService(userId, detail);
+    
+    // Comprobamos si se encontró la nota
+    if (!note) {
+      res.status(404).send({
+        status: 'error',
+        message: 'No se encontró la nota para este detalle y usuario.🔴'
       });
     } else {
-      res.status(404).send({
-        status: "error",
-        message: "No se encontró la nota con el ID proporcionado.🔴"
+      // Si se encontró la nota, enviamos una respuesta exitosa con los detalles de la nota
+      res.status(200).send({
+        status: 'ok',
+        message: 'Nota obtenida correctamente.✅',
+        data: {
+          id: note.id,
+          title: note.title,
+          detail: note.detail,
+          text: note.text
+        }
       });
     }
   } catch (error) {
-    console.error("Error al obtener el detalle de la nota:", error);
+    // Capturamos cualquier error que ocurra durante la consulta y enviamos una respuesta de error
+    console.error('Error al consultar nota por detalle:', error.message);
     res.status(500).send({
-      status: "error",
-      message: "Error interno del servidor al obtener el detalle de la nota.🔴"
+      status: 'error',
+      message: 'Error interno del servidor al consultar nota por detalle.🔴'
     });
   }
 };
 
-export default getNoteDetailController 
+export default getUserNoteDetailController;
+
+
  
 
   //Función detalle de nota
